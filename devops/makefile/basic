@@ -1,0 +1,13 @@
+all: clean build deploy
+
+start:
+	yarn start
+
+clean:
+	rm -rf ./build
+
+build:
+	yarn build
+
+serve:
+	serve -s build

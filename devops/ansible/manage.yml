@@ -1,0 +1,10 @@
+---
+
+#do Something
+- hosts: all
+  become: yes
+  # remote_user: root
+  become_method: sudo 
+
+  roles:
+    - { role: tools, method: "install"}

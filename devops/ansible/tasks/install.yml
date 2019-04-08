@@ -1,0 +1,37 @@
+# Install {{ tool }}
+
+- name: Load a variable file based on the OS type, or a default if not found. Using free-form to specify the file.
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - "default.yml"
+
+- name: TOOLS | Install a list of packages
+  package:
+    name: {{ tools }}
+    state: present
+  vars:
+    tools:
+    - fail2ban
+    - net-tools
+
+- name: TOOLS | Install a list of special packages for debian
+  apt:
+    name: "{{ tools }}"
+    state: present
+  vars:
+    tools:
+    - ???
+  when: ansible_os_family == "Debian"
+
+# Add configurations
+- name: add configurations
+  template: src=config_name.j2 dest=config_path
+
+# Restart and enable service
+- name: Restart and enable service tool, in all cases
+  service:
+    name: tool
+    state: restarted
+    enabled: yes

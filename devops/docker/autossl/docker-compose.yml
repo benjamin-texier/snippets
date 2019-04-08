@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  # Application
+  app:
+    build: .
+    networks:
+    - app_network
+
+  # Nginx pour redirection & https
+  nginx:
+    image: valian/docker-nginx-auto-ssl
+    restart: on-failure
+    ports:
+      - 80:80
+      - 443:443
+    links:
+    - "app:app"
+    networks:
+    - app_network
+    volumes:
+    - ./ssl-data:/etc/resty-auto-ssl
+  env_file:
+    - nginx.env

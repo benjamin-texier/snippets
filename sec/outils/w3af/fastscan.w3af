@@ -1,0 +1,14 @@
+profiles
+use fast_scan
+back
+plugins
+output html_file
+output config html_file
+set output_file $OUTPUT
+back
+back
+target
+set target $TARGET
+back
+start
+exit

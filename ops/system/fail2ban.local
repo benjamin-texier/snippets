@@ -1,0 +1,6 @@
+# 5 requêtes en 10 min -> Ban pour 20 minutes
+[sshd]
+enabled = true
+maxretry = 5
+findtime = 600
+bantime = 1200
